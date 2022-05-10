@@ -1,22 +1,27 @@
-import Header from './Header'
-import { screen, render } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
+/**
+ * @jest-environment jsdom
+ */
+
+import Header from './Header';
+import { screen, render } from '@testing-library/react';
+import { headerJson } from './json/headerJson';
+import '@testing-library/jest-dom/extend-expect';
 describe('<Header/>', () => {
   const renderComponent = () => {
-    const utils = render(<Header />)
+    const utils = render(<Header />);
 
     return {
       ...utils,
-    }
-  }
+    };
+  };
   it('should render', () => {
-    const { container } = renderComponent()
-    expect(container).toBeInTheDocument()
-  })
-  it('should make sure "myObjectives" is in document', () => {
-    renderComponent()
-    expect(screen.getByText('my')).toBeInTheDocument()
-    expect(screen.getByText('O')).toBeInTheDocument()
-    expect(screen.getByText('bjectives')).toBeInTheDocument()
-  })
-})
+    const { container } = renderComponent();
+    expect(container).toBeInTheDocument();
+  });
+
+  test.each(headerJson)('Test if title is in component', ({ name }) => {
+    renderComponent();
+    console.log(name);
+    expect(screen.getByText(`${name}`)).toBeInTheDocument();
+  });
+});

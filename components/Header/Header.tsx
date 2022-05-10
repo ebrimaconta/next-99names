@@ -9,7 +9,7 @@ interface IHeaderTitle {
   textColor: string;
 }
 
-const HeaderTitle = styled('div')<IHeaderTitle>`
+const HeaderTitle = styled('h1')<IHeaderTitle>`
   margin-right: 10px;
   background-color: ${(props) => props.backgroundColor};
   color: ${(props) => props.textColor};
